@@ -1,0 +1,16 @@
+.searchContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+.searchInput {
+  width: 30%;
+  border: none;
+  border-bottom: 0.15rem solid rgb(223, 223, 223);
+  padding-left: 0.5rem;
+}
+.searchInput:focus {
+  outline: none;
+}
