@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react";
 import style from "./fooddetails.module.css";
+import useSpoonacular from "./useSpoonacular";
+import { useState } from "react";
+import Button from "./useSpoonacular"
 
 export default function FoodDetail({ FoodId }) {
-  const URL = `https://api.spoonacular.com/recipes/${FoodId}/information`;
-  const API_KEY = "fc674822498e438e8c25f221a0b4e249";
   const [food, setFood] = useState("pasta"); // Initialize as an empty object
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchFood() {
-      const res = await fetch(`${URL}?apiKey=${API_KEY}`);
-      const data = await res.json();
-      setFood(data);
-      console.log(data);
-      setIsLoading(false);
-    }
-
-    fetchFood();
-  }, [FoodId]);
-
   return (
     <div className={style.FoodInfoContainer}>
       <div>
@@ -31,9 +18,11 @@ export default function FoodDetail({ FoodId }) {
           <h2><span> {food.vegetarian ? "Vegeterian" : "Non-vegeterian"} </span></h2>
         </div>
         <div>
-          <h1>Ingreidents</h1>
-          {food.extendedIngredients.map((item)=> 
-            <h3>{item.name}</h3>
+          <h1>Ingredients</h1>
+          {isLoading ? (
+            <p>Loading.......</p>
+          ) : (
+            <span>{food.extendedIngredients.map(items => <li key={items.name}>{items.name}</li> )}</span>
           )}
         </div>
         <div>
@@ -42,10 +31,11 @@ export default function FoodDetail({ FoodId }) {
             <p>Loading.......</p>
           ) : (
             food.analyzedInstructions[0].steps.map((step) => (
-              <li> {step.step} </li>
+              <li key={step.step}> {step.step} </li>
             ))
           )}
         </div>
+        <Button FoodId={FoodId} setIsLoading={setIsLoading} setFood={setFood}/>
       </div>
 
       <p>{food.title}</p>
