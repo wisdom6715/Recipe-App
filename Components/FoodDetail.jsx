@@ -1,11 +1,12 @@
 import style from "./fooddetails.module.css";
 import useSpoonacular from "./useSpoonacular";
 import { useState } from "react";
-import Button from "./useSpoonacular"
+// import Button from "./useSpoonacular"
 
 export default function FoodDetail({ FoodId }) {
   const [food, setFood] = useState("pasta"); // Initialize as an empty object
   const [isLoading, setIsLoading] = useState(true);
+  useSpoonacular({FoodId, setFood, setIsLoading})
   return (
     <div className={style.FoodInfoContainer}>
       <div>
@@ -35,7 +36,7 @@ export default function FoodDetail({ FoodId }) {
             ))
           )}
         </div>
-        <Button FoodId={FoodId} setIsLoading={setIsLoading} setFood={setFood}/>
+        {/* <Button FoodId={FoodId} setIsLoading={setIsLoading} setFood={setFood}/> */}
       </div>
 
       <p>{food.title}</p>

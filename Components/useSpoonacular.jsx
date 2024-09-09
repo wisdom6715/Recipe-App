@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-function Button({FoodId,setIsLoading, setFood}){
-    console.log(FoodId);
+// function Button({FoodId,setIsLoading, setFood}){
+//     console.log(FoodId);
     
-}
+// }
 export default function useSpoonacular({FoodId, setIsLoading, setFood}){
     const URL = `https://api.spoonacular.com/recipes/${FoodId}/information`;
     const API_KEY = "fc674822498e438e8c25f221a0b4e249";
